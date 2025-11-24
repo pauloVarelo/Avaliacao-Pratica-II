@@ -38,10 +38,10 @@ O arquivo já existe, mas deve conter exatamente:
 
 ```sql
 CREATE TABLE IF NOT EXISTS aluno (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
-    idade INTEGER NOT NULL,
-    curso TEXT NOT NULL
+    id,
+    nome,
+    idade,
+    curso,
 );
 ```
 
