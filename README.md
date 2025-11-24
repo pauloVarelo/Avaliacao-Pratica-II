@@ -101,14 +101,15 @@ Você deve garantir:
 
 ## Critérios de Avaliação
 
-| Critério                                | Peso |
+| Critério                                | Peso | 
 |-----------------------------------------|------|
-| Schema correto conforme especificado     | 20%  |
-| Funcionalidade de listagem implementada | 30%  |
-| Funcionalidade de cadastro implementada | 30%  |
-| Organização e clareza do código         | 10%  |
-| Uso correto de templates                | 5%   |
-| Boas práticas (commit, fechar conexões) | 5%   |
+| Função de UPDATE E DELETE funcionando corretamente | 50% | Desejável |
+| Schema correto conforme especificado     | 10%  | Crítico |
+| Funcionalidade de listagem implementada | 10%  | Crítico |
+| Funcionalidade de cadastro implementada | 10%  | Crítico |
+| Organização e clareza do código         | 10%  | Crítico |
+| Uso correto de templates                | 5%   | Crítico |
+| Boas práticas (commit, fechar conexões) | 5%   | Crítico |
 
 ---
 
