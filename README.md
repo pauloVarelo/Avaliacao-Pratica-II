@@ -1,81 +1,140 @@
 # Prova – Aplicação CRUD de Alunos com Flask & SQLite
 
+## Instruções Iniciais – IMPORTANTE  
+Antes de começar a prova, siga estes passos obrigatórios:
+
+1. **Faça o fork do repositório oficial da atividade** disponibilizado no github do professor, nome do repositorio: Avaliacao-Pratica-II.  
+2. No seu fork, você já encontrará os arquivos:  
+   - `app.py` (pré-criado)  
+   - `schema.sql` (pré-criado)  
+   - Pasta `templates/` contendo os templates base da prova  
+3. A partir disso, você deve desenvolver toda a lógica solicitada **dentro do seu próprio repositório (fork)**.
+
+---
+
 ## Objetivo  
-Desenvolver uma aplicação web simples usando Flask e SQLite que permita cadastrar e listar alunos.  
-O foco é utilizar rotas, templates e interação com banco de dados em Python.
+Desenvolver uma aplicação web simples usando Flask e SQLite que permita cadastrar e listar alunos.
+
+---
 
 ## Descrição da tarefa  
-Você deverá criar uma aplicação com as seguintes características:
+Você deverá completar a aplicação garantindo:
 
-- Um arquivo de esquema de banco de dados `schema.sql` que contém o comando para criação da tabela de alunos.  
-- Um arquivo `app.py` que implementa a aplicação Flask, permitindo ao usuário visualizar a lista de alunos e cadastrar novos.  
-- Dois templates HTML: um para a listagem dos alunos (`index.html`) e outro para o formulário de cadastro (`cadastro.html`).  
-- Persistência dos dados em SQLite (o arquivo do banco pode ter nome à sua escolha).
+- Comunicação correta com o banco de dados SQLite  
+- Leitura do arquivo `schema.sql` para criação das tabelas  
+- Implementação das rotas necessárias  
+- Exibição dos alunos cadastrados  
+- Cadastro de novos alunos  
+
+O arquivo `app.py` já existe no repositório — você deve completar, ajustar e finalizar o código conforme solicitado.
+
+---
 
 ## Requisitos obrigatórios  
 
-1. No arquivo `schema.sql`, inclua **exatamente** o seguinte comando:
+### 1. Banco de Dados (schema.sql)
 
-   ```sql
-   CREATE TABLE IF NOT EXISTS aluno (
-       id INTEGER PRIMARY KEY AUTOINCREMENT,
-       nome TEXT NOT NULL,
-       idade INTEGER NOT NULL,
-       curso TEXT NOT NULL
-   );
-A aplicação deve ter duas rotas principais:
+O arquivo já existe, mas deve conter exatamente:
 
-/ (GET) – exibe uma tabela com todos os alunos cadastrados, mostrando ID, Nome, Idade e Curso.
+```sql
+CREATE TABLE IF NOT EXISTS aluno (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    idade INTEGER NOT NULL,
+    curso TEXT NOT NULL
+);
+```
 
-/cadastro (GET + POST) – exibe o formulário para cadastrar um novo aluno (nome, idade, curso). No método POST, insere o novo aluno no banco e redireciona para /.
+### 2. Funcionalidades da aplicação
 
-No app.py:
+#### Rotas obrigatórias:
 
-Conecte ao banco com sqlite3.connect(...).
+- **`/` (GET)**  
+  Exibe todos os alunos cadastrados, mostrando:  
+  - ID  
+  - Nome  
+  - Idade  
+  - Curso  
 
-Use conn.row_factory = sqlite3.Row para facilitar o acesso aos campos por nome.
+- **`/cadastro` (GET + POST)**  
+  GET → Exibe formulário de cadastro  
+  POST → Recebe dados, insere no banco e redireciona para `/`
 
-Crie uma função (por exemplo start_db()) que seja executada quando a aplicação for iniciada, de modo a garantir que a tabela aluno exista (usando schema.sql).
+### 3. No arquivo `app.py` (já criado):
 
-Garanta que essa função seja chamada no bloco if __name__ == '__main__': ou equivalente ao iniciar a aplicação.
+Você deve garantir:
 
-Nos templates:
+- Conexão ao banco com:  
+  ```python
+  sqlite3.connect(...)
+  ```
 
-index.html: exibir todos os registros da tabela aluno em uma tabela HTML.
+- Uso de:
+  ```python
+  conn.row_factory = sqlite3.Row
+  ```
 
-cadastro.html: apresentar um formulário com campos nome, idade, curso e um botão “Cadastrar”.
+- Criação da função `start_db()` que lê o `schema.sql` ao iniciar a aplicação.
 
-Boas práticas: feche a conexão com o banco de dados após cada operação (conn.close()).
+- Chamado obrigatório dentro de:
+  ```python
+  if __name__ == '__main__':
+  ```
 
-Critérios de avaliação
-Critério	Peso
-Schema correto conforme especificado	20%
-Funcionalidade de listagem implementada	30%
-Funcionalidade de cadastro implementada	30%
-Organização e clareza do código	10%
-Uso adequado de templates e separação	5%
-Boas práticas (fechar conexões, commit)	5%
+- Fechar conexões após cada consulta ou inserção (`conn.close()`)
 
-Instruções para entrega
-Empacotar (zip, tar ou outro método) todos os arquivos da aplicação:
+---
 
-app.py
+## Templates obrigatórios  
 
-schema.sql
+### `index.html`
+- Exibir os registros da tabela `aluno` em uma tabela HTML
 
-Diretório templates/ contendo index.html e cadastro.html
+### `cadastro.html`
+- Formulário com os campos:
+  - nome  
+  - idade  
+  - curso  
+- Botão **Cadastrar**
 
-(Opcional) Diretório static/ com style.css se desejar estilizar as páginas
+---
 
-No cabeçalho do arquivo/zip, inclua: seu nome, turma e data de entrega.
+## Critérios de Avaliação
 
-No código, adicione comentários explicando as partes principais (rotas, conexão ao banco, renderização de templates).
+| Critério                                | Peso |
+|-----------------------------------------|------|
+| Schema correto conforme especificado     | 20%  |
+| Funcionalidade de listagem implementada | 30%  |
+| Funcionalidade de cadastro implementada | 30%  |
+| Organização e clareza do código         | 10%  |
+| Uso correto de templates                | 5%   |
+| Boas práticas (commit, fechar conexões) | 5%   |
 
-Entregar o pacote até a data/hora determinada pelo(a) professor(a).
+---
 
-Observações
-Não é obrigatório implementar funcionalidades de edição (UPDATE) ou exclusão (DELETE) de alunos. Quem implementar terá ponto extra.
+## Instruções para entrega  
 
-A estilização (CSS) é opcional e não interfere diretamente na nota, mas melhora a apresentação.
+Você deverá entregar **apenas o link do seu fork** no GitHub contendo:
 
-Certifique-se de que a aplicação execute sem erros no ambiente local com Python 3.x.
+- `app.py`  
+- `schema.sql`  
+- Pasta `templates/` com `index.html` e `cadastro.html`
+- (Opcional) Pasta `static/` com `style.css`
+
+Além disso:
+
+- Incluir no topo do `README.md`:  
+  **nome do estudante, turma e data**
+- Adicionar comentários no `app.py`
+- Garantir que o projeto está rodando corretamente em Python 3.x
+
+---
+
+## Observações finais  
+
+- **UPDATE/DELETE não são obrigatórios**, mas valem **ponto extra** se implementados.  
+- CSS é opcional, mas recomendável.  
+
+---
+
+Boa prova!  
